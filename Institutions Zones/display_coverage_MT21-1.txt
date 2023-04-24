@@ -1,0 +1,13 @@
+rule "Primo VE - coverage"
+when
+    MARC."362" has any "a" 
+then
+        create pnx."display"."coverage" with MARC "362" subfields
+end
+
+rule "Primo VE - coverage-2"
+when
+    MARC."515" has any "a" 
+then
+        create pnx."display"."coverage" with MARC "515" subfields
+end

@@ -1,0 +1,6 @@
+rule "Primo VE - Dissertation"
+      when
+         MARC is "502"
+      then
+         create pnx."display"."dissertation" with MARC."502" subfields "0-9,a-z" delimited by ", " remove substring using regex "\\.+$"
+end

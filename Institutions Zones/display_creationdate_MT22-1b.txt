@@ -1,0 +1,44 @@
+rule "Primo VE - Date Of Publication 264"
+priority 50
+	when
+ MARC is "264"."c"
+ then
+create pnx."display"."creationdate" with MARC."264"."c"
+end 
+
+#rule "Primo VE - Date Of Publication 250 AND 264"
+#version 2022-1 Q2
+#removed this rule and add Edition separately
+#priority 40
+#when
+#MARC."250" has any "a,b" AND 
+#MARC."264" has any "c"
+#then
+#set TEMP"1" to MARC."250" subfields "a"
+#set TEMP"2" to MARC."250" subfields "b"
+#concatenate with delimiter (TEMP"1",TEMP"2"," / ")
+#set TEMP"3" to MARC."264" subfields "c"
+#concatenate with delimiter (TEMP"1",TEMP"3"," - ")
+#set pnx."display"."creationdate" to TEMP"1"
+#end  
+
+rule "Primo VE - Date Of Publication 008"
+#version 2022-1 Q2
+#add display of date 2 except in case date 2 is 9999
+priority 30
+when
+MARC.control is "008" AND NOT
+MARC."264" has any "c"
+then
+set TEMP"1" to MARC.control."008".Date1
+set TEMP"2" to MARC.control."008".Date2
+replace string by string (TEMP"1","[^0-9]","\\?")
+replace string by string (TEMP"1","9{4}","")
+replace string by string (TEMP"2","[^0-9]","\\?")
+replace string by string (TEMP"2","13{4}","")
+remove substring using regex (TEMP"1","^(0|\\?)+$")
+remove substring using regex (TEMP"2","^(0|\\?)+$")
+replace string by string (TEMP"2","(9999|;)"," ") 
+concatenate with delimiter (TEMP"1",TEMP"2","-")
+set pnx."display"."creationdate" to TEMP"1"
+end

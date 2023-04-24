@@ -1,0 +1,158 @@
+rule "Primo VE - Identifier 020"
+#if modification, table Display constant needs to be adapted
+#version 2020-2
+	when
+		MARC."020" has any "a"
+	then
+		set TEMP"1" to MARC "020" subfields "a"
+		add prefix (TEMP"1","$$CISBN$$V")
+		set TEMP"2" to MARC."020" sub with " (" and ") " without sort "q"
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+	        create pnx."display"."identifier" with TEMP"1"
+		end
+
+
+rule "Primo VE - Identifier 022"
+#version 2020-2
+	when
+		MARC."022" has any "a"
+	then
+		set TEMP"1" to MARC "022" subfields "a"
+		add prefix (TEMP"1","$$CISSN$$V")
+                set TEMP"2" to MARC."022" sub with " (" and ") " without sort "q"
+                remove substring using regex (TEMP"2",";+$")
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 024-ind2"
+#version 2020-2
+	when
+		MARC."024" has any "a,q" AND
+		MARC."024".ind"1"  equals "2"
+	then
+		set TEMP"1" to MARC "024" subfields "a"
+		add prefix (TEMP"1","$$CISMN$$V")
+                set TEMP"2" to MARC."024" sub with " (" and ") " without sort "q"
+                remove substring using regex (TEMP"2",";+$") 
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 024-ind1"
+#version 2022-2
+#add a rule for ind1=1 UPC number
+	when
+		MARC."024" has any "a,q" AND
+		MARC."024".ind"1"  equals "1"
+	then
+		set TEMP"1" to MARC "024" subfields "a"
+		add prefix (TEMP"1","$$CUPC$$V")
+                set TEMP"2" to MARC."024" sub with " (" and ") " without sort "q"
+                remove substring using regex (TEMP"2",";+$") 
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 024-ind3"
+#version 2022-2
+#add rule for ind1=3 EAN number
+	when
+		MARC."024" has any "a,q" AND
+		MARC."024".ind"1"  equals "3"
+	then
+		set TEMP"1" to MARC "024" subfields "a"
+		add prefix (TEMP"1","$$CEAN$$V")
+                set TEMP"2" to MARC."024" sub with " (" and ") " without sort "q"
+                remove substring using regex (TEMP"2",";+$") 
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 024-ind7 doi"
+#version 2022-2
+#add a condition on $2 doi
+	when
+		MARC."024" has any "a,q" AND
+		MARC."024".ind"1"  equals "7" AND
+                 MARC."024"."2" match "doi.*"
+	then
+		set TEMP"1" to MARC "024" subfields "a"
+		add prefix (TEMP"1","$$CDOI$$V")
+                set TEMP"2" to MARC."024" sub with " (" and ") " without sort "q"
+                remove substring using regex (TEMP"2",";+$") 
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 024-ind7 bbl"
+#version 2022-2
+#add a condition on $2 BBL (Alexandria)
+	when
+		MARC."024" has any "a" AND
+		MARC."024".ind"1"  equals "7" AND
+              MARC."024"."2" match "BBL.*"
+	then
+		set TEMP"1" to MARC "024" subfields "a"
+		add prefix (TEMP"1","$$CBBL$$V")
+              set TEMP"2" to MARC."024" subfields "2"
+               remove substring using regex (TEMP"2",";+$") 
+              concatenate with delimiter (TEMP"1",TEMP"2"," / ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 024-ind7 uri"
+#version 2022-2
+#add a condition on $2 uri
+	when
+		MARC."024" has any "a,q" AND
+		MARC."024".ind"1"  equals "7" AND
+                 MARC."024"."2" match "uri.*"
+	then
+		set TEMP"1" to MARC "024" subfields "a"
+		add prefix (TEMP"1","$$CURI$$V")
+                set TEMP"2" to MARC."024" sub with " (" and ") " without sort "q"
+                remove substring using regex (TEMP"2",";+$") 
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 024-ind7 urn"
+#version 2022-2
+#add a condition on $2 urn
+	when
+		MARC."024" has any "a,q" AND
+		MARC."024".ind"1"  equals "7" AND
+                 MARC."024"."2" match "urn.*"
+	then
+		set TEMP"1" to MARC "024" subfields "a"
+		add prefix (TEMP"1","$$CURN$$V")
+                set TEMP"2" to MARC."024" sub with " (" and ") " without sort "q"
+                remove substring using regex (TEMP"2",";+$") 
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 028"
+	when
+		MARC."028" has any "a"
+	then
+		set TEMP"1" to MARC "028" subfields "a"
+		add prefix (TEMP"1","$$CPUBNUM$$V")
+                 set TEMP"2" to MARC."028" sub with " (" and ") " without sort "q"
+                 remove substring using regex (TEMP"2",";+$")
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end
+
+rule "Primo VE - Identifier 013"
+	when
+		MARC."013" has any "a"
+	then
+		set TEMP"1" to MARC "013" subfields "a"
+		add prefix (TEMP"1","$$CPATENTNUM$$V")
+                 set TEMP"2" to MARC."013" sub with " (" and ") " without sort "d"
+                 remove substring using regex (TEMP"2",";+$")
+                concatenate with delimiter (TEMP"1",TEMP"2"," ")
+		create pnx."display"."identifier" with TEMP"1"
+end

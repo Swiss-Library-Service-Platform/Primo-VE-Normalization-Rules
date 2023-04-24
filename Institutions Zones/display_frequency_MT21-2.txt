@@ -1,0 +1,19 @@
+rule "Primo VE - frequency"
+when
+    MARC."310" has any "a,b"
+then
+    set TEMP"1" to MARC."310" sub without sort "a"
+    set TEMP"2" to MARC."310" sub without sort "b"
+    concatenate with delimiter support empty vals (TEMP"1",TEMP"2",", ")
+        create pnx."display"."frequency" with TEMP"1"
+end
+
+rule "Primo VE - former frequency"
+when
+    MARC."321" has any "a,b"
+then
+    set TEMP"1" to MARC."321" sub without sort "a"
+    set TEMP"2" to MARC."321" sub without sort "b"
+    concatenate with delimiter support empty vals (TEMP"1",TEMP"2",", ")
+        create pnx."display"."frequency" with TEMP"1"
+end

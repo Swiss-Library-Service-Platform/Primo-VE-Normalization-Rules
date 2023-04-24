@@ -1,0 +1,102 @@
+rule "Primo VE - Format 300"
+	when
+		MARC is "300"
+	then
+	 set TEMP"1" to MARC."300" subfields "3"
+            set TEMP"2" to MARC."300" subfields "a"
+            set TEMP"3" to MARC."300" subfields "b"
+            set TEMP"4" to MARC."300" subfields "c"
+            set TEMP"5" to MARC."300" subfields "e"
+            concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+            concatenate with delimiter support empty vals (TEMP"1",TEMP"3"," : ")
+            concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ; ") 
+            concatenate with delimiter support empty vals (TEMP"1",TEMP"5"," + ") 
+            add prefix (TEMP"1","300 ")
+     	    create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 340"
+	when
+		MARC is "340"
+	then
+         set TEMP"1" to MARC."340" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+         add prefix (TEMP"1","340 ")
+         create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 254"
+	when
+		MARC is "254"
+	then
+	 set TEMP"1" to MARC."254" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+        add prefix (TEMP"1","254 ")
+        create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 255"
+	when
+		MARC is "255"
+	then
+	    set TEMP"1" to MARC."255" subfields "a"
+            set TEMP"2" to MARC."255" subfields "b"
+            set TEMP"3" to MARC."255" sub with " (" and ") " without sort "c,d,e"
+            concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," ; ")
+            concatenate with delimiter support empty vals (TEMP"1",TEMP"3","  ")
+            add prefix (TEMP"1","255 ")
+            create pnx."display"."format" with TEMP"1"
+end
+
+
+rule "Primo VE - Format 256"
+	when
+		MARC is "256"
+	then
+	    set TEMP"1" to MARC."256" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+            add prefix (TEMP"1","256 ")
+		create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 258"
+	when
+		MARC is "258"
+	then
+	    set TEMP"1" to MARC."258" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+            add prefix (TEMP"1","258 ")
+		create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 346"
+	when
+		MARC is "346"
+	then
+	    set TEMP"1" to MARC."346" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+            add prefix (TEMP"1","346 ")  
+		create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 347"
+	when
+		MARC is "347"
+	then
+	    set TEMP"1" to MARC."347" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+             add prefix (TEMP"1","347 ")
+		create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 351"
+	when
+		MARC is "351"
+	then
+	    set TEMP"1" to MARC."351" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+            add prefix (TEMP"1","351 ")
+		create pnx."display"."format" with TEMP"1"
+end
+
+rule "Primo VE - Format 507"
+	when
+		MARC is "507"
+	then
+	    set TEMP"1" to MARC."507" subfields "3, a-z" delimited by " ; " remove substring using regex "\\.+$"
+            add prefix (TEMP"1","507 ")
+		create pnx."display"."format" with TEMP"1"
+end

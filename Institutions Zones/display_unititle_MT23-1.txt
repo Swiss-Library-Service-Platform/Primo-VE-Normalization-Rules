@@ -1,0 +1,87 @@
+rule "Primo VE - Uniform Title"
+	priority 10
+	when
+		MARC is "130"
+	then
+		set TEMP"1" to MARC."130" sub without sort "a,d,f"
+		remove string (TEMP"1","<<")
+                remove string (TEMP"1",">>")
+               set TEMP"2" to MARC."130" sub with " (" and ") " without sort "g"
+      	       set TEMP"3" to MARC."130" sub without sort "p"
+	       add prefix (TEMP"3",".")
+               set TEMP"4" to MARC."130" sub without sort "s,t"
+               concatenate with delimiter support empty vals (TEMP"1",TEMP"2",", ")
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"3",", ")
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"4",", ")
+          	set pnx."display"."unititle" to TEMP"1"
+end
+
+rule "Primo VE - Uniform Title - 240"
+#Version 23-01
+#Re-ordered subfield "o"
+priority 20
+	when
+		MARC is "240"
+	then
+		set TEMP"1" to MARC."240" sub without sort "a,d,f,g,h,k,l"
+		remove string (TEMP"1","<<")
+                remove string (TEMP"1",">>")
+                set TEMP"2" to MARC."240" subfields "m" delimited by ", " remove substring using regex "\\.+$"
+		set TEMP"3" to MARC."240" sub without sort "n"
+                set TEMP"4" to MARC."240" sub without sort "p"
+                set TEMP"5" to MARC."240" sub without sort "r,s"
+                set TEMP"6" to MARC."240" sub without sort "o"
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"2",", ")
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"3",", ")
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"4",", ")
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"5",", ")
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"6",", ")          
+		set pnx."display"."unititle" to TEMP"1"
+end
+
+rule "Primo VE - Uniform Title - 730"
+#priority 30
+	when
+		MARC is "730"
+	then
+		set TEMP"1" to MARC."730" subfields "a-t" delimited by ". " remove substring using regex "\\.+$"
+	remove string (TEMP"1","<<")
+        remove string (TEMP"1",">>")
+                create pnx."display"."unititle" with TEMP"1"
+end
+
+rule "Primo VE - Alternate Uniform Title - 880-130"
+priority 10
+	when
+		MARC is "880" AND
+		MARC."880"."6" match "130-.*"
+	then
+		set TEMP"1" to MARC."880" excluding num subfields without sort
+		remove string (TEMP"1","<<")
+        remove string (TEMP"1",">>")
+		set pnx."display"."alternate_uniform_title" to TEMP"1"
+end
+
+rule "Primo VE - Alternate Uniform Title - 880-240"
+priority 20
+	when
+		MARC is "880" AND
+		MARC."880"."6" match "240-.*"
+	then
+		set TEMP"1" to MARC."880" excluding num subfields without sort
+		remove string (TEMP"1","<<")
+        remove string (TEMP"1",">>")
+        set pnx."display"."alternate_uniform_title" to TEMP"1"
+end
+
+rule "Primo VE - Alternate Uniform Title -880-730"
+#priority 30
+	when
+		MARC is "880" AND
+		MARC."880"."6" match "730-.*"
+	then
+		set TEMP"1" to MARC."880" excluding num subfields without sort
+		remove string (TEMP"1","<<")
+        remove string (TEMP"1",">>")
+        create pnx."display"."alternate_uniform_title" with TEMP"1"
+end

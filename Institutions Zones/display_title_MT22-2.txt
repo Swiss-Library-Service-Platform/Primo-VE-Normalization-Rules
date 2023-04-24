@@ -1,0 +1,189 @@
+rule "Primo VE - Title"
+#version 2022-2
+#rule ok with $a $n $p $b= $n $p 
+#do not modify. nza 01.09.22
+#example: $a Handbuch der Orientalistik $n Abt. 2 $p Indien $b = Handbook of Oriental studies. #Section 2, India
+#when 245$b starts with "=" take this as punctuation between $a and $b
+when
+    MARC is "245"."a"  AND 
+                MARC."245"."b" match "=.*" AND
+                (MARC."245"."p" match ".*" OR
+                MARC."245"."n" match ".*")
+then
+set TEMP"1" to MARC."245" sub without sort "a,n,p,b,k,g" wrap subfields
+replace wrapping delimiters (TEMP"1","a","",". ")
+replace wrapping delimiters (TEMP"1","n","",". ")
+replace wrapping delimiters (TEMP"1","p",""," ")
+replace wrapping delimiters (TEMP"1","b",""," ")
+replace wrapping delimiters (TEMP"1","k","",". ")
+replace wrapping delimiters (TEMP"1","g","",". ")
+remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+create pnx."display"."title" with TEMP"1"
+end
+
+rule "Primo VE - Title - 880"
+#version 2022-2
+#rule ok with $a $n $p
+#do not modify. nza 01.09.22
+#example: $aVestnik Moskovskogo universiteta. $nSerii͡a 18, $pSot͡siologii͡a i politologii͡a
+when
+MARC is "880" AND
+   MARC."880"."6" match "245-.*" AND 
+                MARC."880"."b" match "=.*" AND
+                (MARC."880"."p" match ".*" OR
+                MARC."880"."n" match ".*")
+then
+set TEMP"1" to MARC."880" sub without sort "a,n,p,b,k,g" wrap subfields
+replace wrapping delimiters (TEMP"1","a","",". ")
+replace wrapping delimiters (TEMP"1","n","",". ")
+replace wrapping delimiters (TEMP"1","p",""," ")
+replace wrapping delimiters (TEMP"1","b",""," ")
+replace wrapping delimiters (TEMP"1","k","",". ")
+replace wrapping delimiters (TEMP"1","g","",". ")
+remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+create pnx."display"."title" with TEMP"1"
+end
+
+rule "Primo VE - Title-1"
+#version 2022-2
+#rule ok with $a $b= no n p
+#do not modify. nza 01.09.22
+#example: $aFestschrift Felix Kreissler $b= Mélanges Felix Kreissler
+#when 245$b starts with "=" take this as punctuation between $a and $b
+	when
+	     MARC is "245"."a"  AND 
+                MARC."245"."b" match "=.*" AND NOT
+                (MARC."245"."p" match ".*" OR
+                MARC."245"."n" match ".*")
+		then
+set TEMP"1" to MARC."245" subfields "a"
+set TEMP"2" to MARC."245" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2","  ")
+remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+create pnx."display"."title" with TEMP"1"
+end
+
+rule "Primo VE - Title-1-880"
+#version 2022-2
+#rule ok with $a $b= no n p
+#do not modify. nza 01.09.22
+#example: Mélanges en l' honneur de Ridha Jenayah
+#when 245$b starts with "=" take this as punctuation between $a and $b
+when
+MARC is "880" AND
+   MARC."880"."6" match "245-.*" AND 
+                MARC."880"."b" match "=.*" AND NOT
+                (MARC."880"."p" match ".*" OR
+                MARC."880"."n" match ".*")
+		then
+set TEMP"1" to MARC."880" subfields "a"
+set TEMP"2" to MARC."880" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2","  ")
+remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+create pnx."display"."title" with TEMP"1"
+end
+
+rule "Primo VE - Title - 2"
+#version 2022-2
+#rule ok with $a $b;
+#do not modify. nza 01.09.22
+#example : $a Mémoires $b; suivi de Lettre anonyme au Roi et oeuvres diverses
+#when 245$b starts with ";" take this as punctuation between $a and $b
+when
+    MARC is "245"."a"  AND 
+                MARC."245"."b" match ";.*" AND NOT
+                (MARC."245"."p" match ".*" OR
+                MARC."245"."n" match ".*")
+then
+set TEMP"1" to MARC."245" subfields "a"
+set TEMP"2" to MARC."245" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2","  ")
+remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+create pnx."display"."title" with TEMP"1"
+end
+
+rule "Primo VE - Title - 2-880"
+#version 2022-2
+#rule ok with $a $b;
+#no example
+#when 245$b starts with ";" take this as punctuation between $a and $b
+when
+      MARC is "880" AND
+              MARC."880"."6" match "245-.*" AND
+             MARC."880"."b" match ";.*" AND NOT
+               (MARC."880"."p" match ".*" OR
+               MARC."880"."n" match ".*")
+then
+set TEMP"1" to MARC."880" subfields "a"
+set TEMP"2" to MARC."880" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2","  ")
+remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+create pnx."display"."title" with TEMP"1"
+end
+
+rule "Primo VE - Title - 3"
+#version 2022-2
+#none of the rules above; " : " between $a and $b
+#example: $a Deux siècles précurseurs $b essais et mélanges
+when
+    MARC is "245"."a"  AND NOT
+                (MARC."245"."b" match ",.*" OR
+                  MARC."245"."b" match ";.*" OR
+                  MARC."245"."b" match "=.*") 
+then
+set TEMP"1" to MARC."245" sub without sort "a"
+set TEMP"2" to MARC."245" sub without sort "n,p" wrap subfields
+replace wrapping delimiters (TEMP"2","n","",". ")
+replace wrapping delimiters (TEMP"2","p",""," ")
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," ")
+set TEMP"3" to MARC."245" sub without sort "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3"," : ")
+set TEMP"4" to MARC."245" sub without sort "k"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4",". ")
+set TEMP"5" to MARC."245" sub without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"5"," ")
+       remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+                remove string (TEMP"1","<<")
+                remove string (TEMP"1",">>")
+                create pnx."display"."title" with TEMP"1"
+end
+
+rule "Primo VE - Title - 3-880"
+#version 2022-2
+#none of the rules above; " : " between $a and $b
+#example: $aČornobylʹsʹka chronika $bLjudy
+when
+      MARC is "880" AND
+              MARC."880"."6" match "245-.*" AND NOT
+              (MARC."880"."b" match ",.*" OR
+               MARC."880"."b" match ";.*" OR
+               MARC."880"."b" match "=.*") 
+then
+set TEMP"1" to MARC."880" sub without sort "a"
+set TEMP"2" to MARC."880" sub without sort "n,p" wrap subfields
+replace wrapping delimiters (TEMP"2","n","",". ")
+replace wrapping delimiters (TEMP"2","p",""," ")
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," ")
+set TEMP"3" to MARC."880" sub without sort "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3"," : ")
+set TEMP"4" to MARC."880" sub without sort "k"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4",". ")
+set TEMP"5" to MARC."880" sub without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"5"," ")
+       remove substring using regex (TEMP"1","(/|:|: |;|; |=|,)+$")
+                remove string (TEMP"1","<<")
+                remove string (TEMP"1",">>")
+                create pnx."display"."title" with TEMP"1"
+end

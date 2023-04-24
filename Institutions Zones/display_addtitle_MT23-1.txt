@@ -1,0 +1,250 @@
+rule "Primo VE - addtitle 246-ind0"
+#version 2022-2
+#246 with 2nd indicator 0
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "0"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CPORTIONTITLE$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind1"
+#version 2022-2
+#246 with 2nd indicator 1
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "1"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CPARALLEL$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind2"
+#version 2022-2
+#246 with 2nd indicator 2
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "2"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CDISTINCTIVE$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind3"
+#version 2022-2
+#246 with 2nd indicator 3
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "3"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$COTHER$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind4"
+#version 2022-2
+#246 with 2nd indicator 4
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "4"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CCOVER$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind5"
+#version 2022-2
+#246 with 2nd indicator 5
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "5"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CADD$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind6"
+#version 2022-2
+#246 with 2nd indicator 6
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "6"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CCAPTION$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+
+rule "Primo VE - addtitle 246-ind7"
+#version 2022-2
+#246 with 2nd indicator 7
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "7"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CRUNNING$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind8"
+#version 2022-2
+#246 with 2nd indicator 8
+	when
+		MARC."246" has any "a" AND
+		MARC."246".ind"2"  equals "8"
+        then
+set TEMP"1" to MARC "246" subfields "a"
+add prefix (TEMP"1","$$CSPINE$$V")
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 246-ind"
+#version 2023-1
+#display subifield i only if 1st ind,. 1
+	when
+		MARC."246" has any "i" AND 
+		MARC."246".ind"1" equals "1"
+    then
+set TEMP"1" to MARC "246" subfields "i"
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "246" subfields "a"
+remove string (TEMP"2","<<")
+remove string (TEMP"2",">>")
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "246" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3"," : ")
+set TEMP"4" to MARC "246" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4",". ")
+set TEMP"5" to MARC."246" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"5"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 247"
+	when
+		MARC."247" has any "a,b,f,g,n,p"
+         then
+set TEMP"1" to MARC "247" subfields "a"
+set TEMP"2" to MARC "247" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC."247" sub with " (" and ") " without sort "f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3"," ")
+set TEMP"4" to MARC "247" subfields "g,n,p"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4",". ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 880-246"
+	when
+		MARC."880" has any "i,a" AND
+		MARC."880"."6" match "246-.*" AND NOT
+		MARC."880".ind"2" equals ".*"
+	then
+set TEMP"1" to MARC "880" subfields "i,a"
+remove string (TEMP"1","<<")
+remove string (TEMP"1",">>")
+set TEMP"2" to MARC "880" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC "880" subfields "n,p,f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3",". ")
+set TEMP"4" to MARC."880" sub with " (" and ") " without sort "g"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ")
+create pnx."display"."addtitle" with TEMP"1"
+end
+
+rule "Primo VE - addtitle 880-247"
+	when
+		MARC."880" has any "a,b,f,g,n,p" AND
+		MARC."880"."6" match "247-.*"
+	then
+set TEMP"1" to MARC "880" subfields "a"
+set TEMP"2" to MARC "880" subfields "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," : ")
+set TEMP"3" to MARC."880" sub with " (" and ") " without sort "f"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3"," ")
+set TEMP"4" to MARC "880" subfields "g,n,p"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4",". ")
+create pnx."display"."addtitle" with TEMP"1"
+end
