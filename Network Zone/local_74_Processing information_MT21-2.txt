@@ -1,0 +1,9 @@
+rule "Primo VE - Lds74"
+when
+MARC."594" has any "a,b"
+then
+set TEMP"1" to MARC."594" sub without sort "a"
+set TEMP"2" to MARC."594" sub without sort "b"
+concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," . ")
+create pnx."display"."lds74" with TEMP"1"
+end

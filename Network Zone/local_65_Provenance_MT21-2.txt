@@ -1,0 +1,7 @@
+rule "Primo VE - Lds65"
+when
+MARC."541" has any "3,n,o,a,b,c,d,e,f,h"
+then
+set TEMP"1" to MARC."541" subfields "3,n,o,a,c,d,e,f" delimited by " ; " remove substring using regex "\\+$"
+create pnx."display"."lds65" with TEMP"1"
+end

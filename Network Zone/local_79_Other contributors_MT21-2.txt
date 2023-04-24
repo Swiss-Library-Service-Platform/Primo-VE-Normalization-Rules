@@ -1,0 +1,6 @@
+rule "Primo VE - Lds79"
+when
+MARC."508" has any "a"
+then
+create pnx."display"."lds79" with MARC."508" sub without sort "a" 
+end
