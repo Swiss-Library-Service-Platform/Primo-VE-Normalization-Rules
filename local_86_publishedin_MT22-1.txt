@@ -1,0 +1,32 @@
+rule "Primo VE - Lds86"
+# 773 for display as "published in"
+# version 2022 Q2
+when
+	MARC."773" has any "g,t" 
+	then
+		set TEMP"1" to MARC."773" subfields "t" 
+		set TEMP"2" to MARC."773" subfields "g"
+		remove substring using regex (TEMP"2","yr:.+$")
+		remove substring using regex (TEMP"2","nr:.+$")
+		set TEMP"3" to MARC."773" subfields "d"
+		concatenate with delimiter (TEMP"1",TEMP"3",". - ")
+		concatenate with delimiter (TEMP"1",TEMP"2",". - ")
+		create pnx."display"."lds86" with TEMP"1"
+end
+
+rule "Primo VE - Lds86 - 880 $6 773"
+# 880 linked to 773 for display as "published in"
+# version 2022 Q2
+when
+	MARC."880" has any "g,t" AND
+	MARC."880"."6" match "773-.*"
+	then
+		set TEMP"1" to MARC."880" subfields "t" 
+		set TEMP"2" to MARC."880" subfields "g"
+		remove substring using regex (TEMP"2","yr:.+$")
+		remove substring using regex (TEMP"2","nr:.+$")
+		set TEMP"3" to MARC."880" subfields "d"
+		concatenate with delimiter (TEMP"1",TEMP"3",". - ")
+		concatenate with delimiter (TEMP"1",TEMP"2",". - ")
+		create pnx."display"."lds86" with TEMP"1"
+end

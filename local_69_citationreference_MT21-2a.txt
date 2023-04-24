@@ -1,0 +1,23 @@
+rule "Primo VE - Lds69"
+when
+MARC."510" has any "3,a,b,c,u"
+then
+        set TEMP"1" to MARC."510" subfields "u"
+        set TEMP"2" to MARC."510" subfields "a"
+        add suffix  (TEMP"2","</a>")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"")
+        add suffix  (TEMP"1","\">")
+        concatenate with delimiter (TEMP"1",TEMP"2","")
+        set TEMP"3" to MARC."510" subfields "3,b,c"
+       concatenate with delimiter (TEMP"1",TEMP"3"," ")
+       create pnx."display"."lds69" with TEMP"1"
+end
+
+rule "Primo VE - Lds69-1"
+when
+MARC."510" has any "a,u" AND
+MARC."510"."a" match ".*" AND NOT MARC."510"."u" match ".*"
+then
+create pnx."display"."lds69" with MARC."510" subfields
+end
+

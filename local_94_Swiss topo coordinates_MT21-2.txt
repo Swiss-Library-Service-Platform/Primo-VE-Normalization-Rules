@@ -1,0 +1,9 @@
+rule "Primo VE - Lds94"
+	when
+		MARC."595" has any "d,e,f,g"
+	then
+                set TEMP"1" to MARC."595" subfields "d,e" delimited by " - " remove substring using regex "\\+$"
+		set TEMP"2" to MARC."595" subfields "f,g" delimited by " - " remove substring using regex "\\+$"
+                concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," / ")
+		create pnx."display"."lds94" with TEMP"1"
+end

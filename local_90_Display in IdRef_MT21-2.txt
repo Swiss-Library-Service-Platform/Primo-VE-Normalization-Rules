@@ -1,0 +1,273 @@
+rule "Primo VE - Lds90"
+when
+	MARC is "100"."0" 
+        AND MARC."100"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."100"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."100" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-2"
+when
+	MARC is "110"."0" 
+        AND MARC."110"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."110"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."110" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-3"
+when
+	MARC is "111"."0" 
+        AND MARC."111"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."111"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."111" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-4"
+when
+	MARC is "130"."0" 
+        AND MARC."130"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."130"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."130" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-61"
+when
+	MARC is "600"."0" 
+        AND MARC."600"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."600"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."600" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-62"
+when
+	MARC is "610"."0" 
+        AND MARC."610"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."610"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."610" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-63"
+when
+	MARC is "611"."0" 
+        AND MARC."611"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."611"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."611" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-64"
+when
+	MARC is "630"."0" 
+        AND MARC."630"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."630"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."630" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-67"
+when
+	MARC is "650"."0" 
+        AND MARC."650"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."650"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."650" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-68"
+when
+	MARC is "651"."0" 
+        AND MARC."651"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."651"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."651" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-71"
+when
+	MARC is "700"."0" 
+        AND MARC."700"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."700"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."700" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-72"
+when
+	MARC is "710"."0" 
+        AND MARC."710"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."710"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."710" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-73"
+when
+	MARC is "711"."0" 
+        AND MARC."711"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."711"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."711" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-74"
+when
+	MARC is "730"."0" 
+        AND MARC."730"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."730"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."730" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+
+rule "Primo VE - Lds90-78"
+when
+	MARC is "751"."0" 
+        AND MARC."751"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."751"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."751" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds90-81"
+when
+	MARC is "880"."0" 
+        AND MARC."880"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."880"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."880" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+       create pnx."display"."lds90" with TEMP"1"        
+end	
+

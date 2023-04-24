@@ -1,0 +1,11 @@
+rule "Primo VE - Lds91"
+when
+MARC."210" has any "a,b"
+then
+set TEMP"1" to MARC "210" subfields "a"
+set TEMP"2" to MARC "210" subfields "b"
+add prefix (TEMP"2","(")
+add suffix (TEMP"2",")")
+concatenate with delimiter (TEMP"1",TEMP"2","  ")
+create pnx."display"."lds91" with TEMP"1"
+end
