@@ -1,0 +1,7 @@
+rule "Primo VE - lsr44"
+	when
+		MARC is "084"."a" AND
+                MARC."084"."2" match "cjurrom.*"
+	then
+		create pnx."search"."lsr44" with MARC "084"."a"
+end

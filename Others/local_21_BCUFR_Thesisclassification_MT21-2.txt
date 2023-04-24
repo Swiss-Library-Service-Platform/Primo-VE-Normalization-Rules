@@ -1,0 +1,7 @@
+rule "Primo VE - Lds21"
+	when
+		MARC is "961"."a" AND
+                (MARC."961"."2" match "MEMFR" OR MARC."961"."2" match "MASTFR"  OR MARC."961"."2" match "THFR") 
+	then
+		create pnx."display"."lds21" with MARC "961" sub without sort "2,a"
+end

@@ -1,0 +1,16 @@
+rule "Primo VE - Lds35"
+#rule for 650 PHSG
+	when
+		MARC."650" has any "a,x" AND NOT
+		MARC."650".ind"2"  equals "2" AND
+	        MARC."650"."2" match "hph-phsg"
+	then
+		set TEMP"1" to MARC."650" sub without sort "a"
+		remove string (TEMP"1","<")
+		remove string (TEMP"1",">") 
+  		set TEMP"2" to MARC."650" sub without sort "x"
+                remove string (TEMP"2","<")
+		remove string (TEMP"2",">") 
+             concatenate with delimiter support empty vals (TEMP"1",TEMP"2",":  ")
+        create pnx."display"."lds35" with TEMP"1"
+end

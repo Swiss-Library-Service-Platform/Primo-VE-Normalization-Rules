@@ -1,0 +1,8 @@
+rule "Primo VE - Lds27"
+	when
+               MARC is "990" AND
+               (MARC."990"."2" match "LUBUL" OR
+                MARC."990"."2" match "MEAA")
+         then
+               create pnx."display"."lds27" with MARC "990" excluding num subfields without sort
+end

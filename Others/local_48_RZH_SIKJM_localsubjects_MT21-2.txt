@@ -1,0 +1,8 @@
+rule "Primo VE - Lds48"
+	#rule for SIKJM
+when
+		MARC is "960" AND MARC."960"."2" match "E45"
+            
+	then
+		create pnx."display"."lds48" with MARC "960" excluding num subfields without sort
+end

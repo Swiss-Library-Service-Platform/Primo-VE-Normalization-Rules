@@ -1,0 +1,9 @@
+rule "Primo VE - Lds47"
+	#rule for VGE classifications
+when
+		MARC is "961" AND 
+(MARC."961"."2" match "ge-vimv" OR MARC."961"."2" match "jv" OR MARC."961"."2" match "nb" OR MARC."961"."2" match "dew-gevbaa" OR MARC."961"."2" match "ge-baap" OR MARC."961"."2" match "ge-baav" OR MARC."961"."2" match "ge-vbaa" OR MARC."961"."2" match "genava" OR MARC."961"."2" match "genavr" OR MARC."961"."2" match "cdu-gevcjb" OR MARC."961"."2" match "pcdm-sys" OR MARC."961"."2" match "pcdm" OR MARC."961"."2" match "ge-vmhn" OR MARC."961"."2" match "cdu-gevmhs")
+            
+	then
+		create pnx."display"."lds47" with MARC "961" excluding num subfields without sort
+end
