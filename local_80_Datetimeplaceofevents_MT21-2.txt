@@ -1,8 +1,0 @@
-rule "Primo VE - Lds80"
-when
-MARC."518" has any "3,a,d,o,p"
-then
-         set TEMP"1" to MARC."518" subfields "3"
-         set TEMP"2" to MARC."518" subfields "a,d,o,p" delimited by " , " remove substring using regex "\\.+$"
-         create pnx."display"."lds80" with MARC."518" sub without sort "3,a,d,o,p" 
-end
