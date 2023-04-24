@@ -1,0 +1,30 @@
+rule "Primo VE Marc - Lsr52"
+	when
+		MARC is "751"."a"
+	then
+		create pnx."search"."lsr52" with MARC "751"."a"
+end
+rule "Primo VE Marc - Lsr52 - 264a"
+	when
+		MARC is "264"."a"
+	then
+		create pnx."search"."lsr52" with MARC "264"."a"
+end
+rule "Primo VE Marc - Lsr52 -264b"
+	when
+		MARC is "264"."b"
+	then
+		create pnx."search"."lsr52" with MARC "264"."b"
+end
+rule "Primo VE Marc - Lsr52 - 260a"
+	when
+		MARC is "260"."a"
+	then
+		create pnx."search"."lsr52" with MARC "260"."a"
+end
+rule "Primo VE Marc - Lsr52 -260b"
+	when
+		MARC is "260"."b"
+	then
+		create pnx."search"."lsr52" with MARC "260"."b"
+end

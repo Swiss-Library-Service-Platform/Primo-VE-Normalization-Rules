@@ -1,0 +1,42 @@
+rule "Primo VE Marc - Lsr06"
+	when
+		MARC."060" has any "a-z,2"
+	then
+		create pnx."search"."lsr06" with MARC "060" subfields "a-z,2"
+end
+
+rule "Primo VE Marc - Lsr06-060"
+when
+		MARC."080" has any "a-z,2"
+	then
+		create pnx."search"."lsr06" with MARC "080" subfields "a-z,2"
+end
+
+rule "Primo VE Marc - Lsr06-082"
+when
+		MARC."082" has any "a-z,2"
+	then
+		create pnx."search"."lsr06" with MARC "082" subfields "a-z,2"
+end
+
+rule "Primo VE Marc - Lsr06-083"
+when
+		MARC."083" has any "a-z,2"
+	then
+		create pnx."search"."lsr06" with MARC "083" subfields "a-z,2"
+end
+
+rule "Primo VE Marc - Lsr06-084"
+when
+		MARC."084" has any "a,b,2"
+	then
+		create pnx."search"."lsr06" with MARC "084" subfields "a,b,2"
+end
+
+rule "Primo VE Marc - Lsr06-085"
+when
+		MARC."085" has any "a-z,2"
+	then
+		create pnx."search"."lsr06" with MARC "085" subfields "a-z,2"
+end
+

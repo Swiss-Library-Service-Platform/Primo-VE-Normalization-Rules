@@ -1,0 +1,37 @@
+rule "Primo VE - Lds12"
+#version 2022-2
+#mapped with dc records
+#add hypertext link for $u if existing
+
+when
+MARC."561" has any "3,a,u,5" AND
+(MARC."561"."u" match "http.*" OR MARC."561"."u" match "https.*")
+then
+        set TEMP"1" to MARC."561" subfields "u"
+        set TEMP"2" to MARC."561" subfields "a"
+        add suffix  (TEMP"2","</a>")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"")
+        add suffix  (TEMP"1","\">")
+        concatenate with delimiter (TEMP"1",TEMP"2","")
+        set TEMP"3" to MARC."561" subfields "3"
+       concatenate with delimiter (TEMP"1",TEMP"3"," ")
+	   set TEMP"4" to MARC."561" sub with " (" and ") " without sort "5" 
+remove substring using regex (TEMP"4","(/|:|;|=|,)+$")
+concatenate with delimiter support empty vals (TEMP"1",TEMP"4","")
+       create pnx."display"."lds12" with TEMP"1"
+end
+
+rule "Primo VE - Lds12-1"
+when
+MARC."561" has any "3,a,u,5" AND
+MARC."561"."a" match ".*" AND NOT (MARC."561"."u" match "http.*" OR MARC."561"."u" match "https.*")
+then
+       set TEMP"1" to MARC."561" subfields "3,a"
+      set TEMP"2" to MARC."561" subfields "u"
+     concatenate with delimiter (TEMP"1",TEMP"2"," ; ")
+     set TEMP"3" to MARC."561" sub with " (" and ") " without sort "5" 
+remove substring using regex (TEMP"3","(/|:|;|=|,)+$")
+concatenate with delimiter support empty vals (TEMP"1",TEMP"3","")
+create pnx."display"."lds12" with TEMP"1"
+end
+

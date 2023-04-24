@@ -1,0 +1,21 @@
+rule "Primo VE Marc - Lsr55" 
+	when
+		MARC is "650"."a" AND MARC."650"."2" match "jurivoc*"
+	then
+		create pnx."search"."lsr55" with MARC."650" sub without sort "a"
+end
+
+
+rule "Primo VE Marc -  Lsr55-1"
+		when
+		MARC is "651"."a" AND MARC."651"."2" match "jurivoc*"
+	then
+		create pnx."search"."lsr55" with MARC."651" sub without sort "a"
+end
+
+rule "Primo VE Marc -  Lsr55-2"
+		when
+		MARC is "600"."a" AND MARC."600"."2" match "jurivoc*"
+	then
+		create pnx."search"."lsr55" with MARC."600" sub without sort "a"
+end

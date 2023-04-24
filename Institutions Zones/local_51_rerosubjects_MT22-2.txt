@@ -1,0 +1,89 @@
+rule "Primo VE - Lds51"
+	when
+		MARC."600" has any "a-u,w-z" AND NOT
+		MARC."600".ind"2"  equals "2" AND
+               (MARC."600"."2" match "rero.*" OR MARC."600"."2" match "idref")
+	then
+		set TEMP"1" to MARC."600" subfields "a-u,w" delimited by " " remove substring using regex "\\.+$"
+		remove string (TEMP"1","<")
+		remove string (TEMP"1",">") 
+		set TEMP"2" to MARC."600" sub without sorting "x-z" delimited by " -- "
+                remove substring using regex (TEMP"2","\\.+$")		
+		concatenate with delimiter (TEMP"1",TEMP"2"," -- ")
+        create pnx."display"."lds51" with TEMP"1"
+end
+
+rule "Primo VE - Lds51 - 610"
+	when
+		MARC."610" has any "a-u,w-z" AND NOT
+		MARC."610".ind"2"  equals "2" AND
+               (MARC."610"."2" match "rero.*" OR  MARC."610"."2" match "idref")
+	then
+		set TEMP"1" to MARC."610" subfields "a-u,w" delimited by " " remove substring using regex "\\.+$"
+		remove string (TEMP"1","<")
+		remove string (TEMP"1",">") 
+		set TEMP"2" to MARC."610" sub without sorting "x-z" delimited by " -- "
+                remove substring using regex (TEMP"2","\\.+$")		
+		concatenate with delimiter (TEMP"1",TEMP"2"," -- ")
+        create pnx."display"."lds51" with TEMP"1"
+end
+
+rule "Primo VE - Lds51 - 611"
+	when
+		MARC."611" has any "a-u,w-z" AND NOT
+		MARC."611".ind"2"  equals "2" AND
+               (MARC."611"."2" match "rero.*" OR  MARC."611"."2" match "idref")
+	then
+		set TEMP"1" to MARC."611" subfields "a-u,w" delimited by " " remove substring using regex "\\.+$"
+		remove string (TEMP"1","<")
+		remove string (TEMP"1",">") 
+		set TEMP"2" to MARC."611" sub without sorting "x-z" delimited by " -- "
+                remove substring using regex (TEMP"2","\\.+$")		
+		concatenate with delimiter (TEMP"1",TEMP"2"," -- ")
+        create pnx."display"."lds51" with TEMP"1"
+end
+
+rule "Primo VE - Lds51 - 630"
+	when
+		MARC."630" has any "a-u,w-z" AND NOT
+		MARC."630".ind"2"  equals "2" AND
+               (MARC."630"."2" match "rero.*" OR  MARC."630"."2" match "idref")
+	then
+		set TEMP"1" to MARC."630" subfields "a-u,w" delimited by " " remove substring using regex "\\.+$"
+		remove string (TEMP"1","<")
+		remove string (TEMP"1",">") 
+		set TEMP"2" to MARC."630" sub without sorting "x-z" delimited by " -- "
+                remove substring using regex (TEMP"2","\\.+$")		
+		concatenate with delimiter (TEMP"1",TEMP"2"," -- ")
+        create pnx."display"."lds51" with TEMP"1"
+end
+
+rule "Primo VE - Lds51 - 650"
+	when
+		MARC."650" has any "a-u,w-z" AND NOT
+		MARC."650".ind"2"  equals "2" AND
+	        (MARC."650"."2" match "rero.*" OR  MARC."650"."2" match "idref")
+	then
+		set TEMP"1" to MARC."650" subfields "a-u,w" delimited by " " remove substring using regex "\\.+$"
+		remove string (TEMP"1","<")
+		remove string (TEMP"1",">") 
+		set TEMP"2" to MARC."650" sub without sorting "x-z" delimited by " -- "
+                 remove substring using regex (TEMP"2","\\.+$")		
+               concatenate with delimiter (TEMP"1",TEMP"2"," -- ")
+        create pnx."display"."lds51" with TEMP"1"
+end
+
+rule "Primo VE - Lds51 - 651"
+	when
+		MARC."651" has any "a-u,w-z" AND NOT
+		MARC."651".ind"2"  equals "2"  AND 
+               (MARC."651"."2" match "rero.*" OR MARC."651"."2" match "idref")
+	then
+		set TEMP"1" to MARC."651" subfields "a-u,w" delimited by " " remove substring using regex "\\.+$"
+		remove string (TEMP"1","<")
+		remove string (TEMP"1",">") 
+		set TEMP"2" to MARC."651" sub without sorting "x-z" delimited by " -- "
+                remove substring using regex (TEMP"2","\\.+$")
+		concatenate with delimiter (TEMP"1",TEMP"2"," -- ")
+        create pnx."display"."lds51" with TEMP"1"
+end

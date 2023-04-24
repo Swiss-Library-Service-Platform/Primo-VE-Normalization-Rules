@@ -1,0 +1,51 @@
+rule "Primo VE - Lds56"
+	when
+		MARC is "060"
+	then
+	set TEMP"1" to MARC."060" sub without sort "a-z,1"
+	add suffix (TEMP"1"," (NLM)")
+		create pnx."display"."lds56" with TEMP"1"
+end
+
+rule "Primo VE - Lds56 - 080"
+	when
+		MARC is "080"
+	then
+	set TEMP"1" to MARC."080" sub without sort "a-z,1"
+	add suffix (TEMP"1"," (UDC) ")
+		create pnx."display"."lds56" with TEMP"1"
+end
+
+rule "Primo VE - Lds56 - 082"
+	when
+		MARC is "082"
+	then
+	set TEMP"1" to MARC."082" sub without sort "a-z,1"
+	add suffix (TEMP"1"," (Dewey)")
+		create pnx."display"."lds56" with TEMP"1"
+end
+
+rule "Primo VE - Lds56 - 083"
+	when
+		MARC is "083"
+	then
+	set TEMP"1" to MARC."083" sub without sort "a-z,1"
+	add suffix (TEMP"1"," (Additional Dewey)")
+		create pnx."display"."lds56" with TEMP"1"
+end
+
+rule "Primo VE - Lds56 - 084"
+	when
+		MARC."084" has any "a,2"
+	then
+	create pnx."display"."lds56" with MARC "084" subfields "a,2" append translation "2"
+	end
+
+rule "Primo VE - Lds56 - 085"
+	when
+		MARC is "085"
+	then
+	set TEMP"1" to MARC."085" sub without sort "a-z,1"
+	add suffix (TEMP"1"," (Synthesized classification)")
+		create pnx."display"."lds56" with TEMP"1"
+end

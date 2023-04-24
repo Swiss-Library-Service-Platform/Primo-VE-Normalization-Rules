@@ -1,0 +1,6 @@
+rule "Primo VE Marc - Lsr53"
+	when
+		MARC is "382"
+	then
+		create pnx."search"."lsr53" with MARC "382" subfields
+end
