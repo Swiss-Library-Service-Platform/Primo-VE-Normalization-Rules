@@ -200,7 +200,7 @@ end
 
 
 rule "Primo VE - Relation 776"
-#version 2023-1
+#version 23-1
 	when
 		MARC."776" has any "t"
 	then
