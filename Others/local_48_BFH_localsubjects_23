@@ -1,0 +1,15 @@
+rule "Primo VE - Lds48"
+	when
+		MARC is "960"."a"
+	then
+		create pnx."display"."lds48" with MARC "960"."a"
+end
+
+rule "Primo VE - Lds48-690"
+#added by FFI on may 9th 2023
+	when
+		MARC is "690"."a" AND
+                MARC."690"."2" match "EHSM.*"
+	then
+		create pnx."display"."lds48" with MARC "690"."a"
+end
