@@ -1,0 +1,134 @@
+rule "Primo VE Display - contributor 700"
+#version 2022-2
+#add display bcd to temp2 to perform exact search
+#version 2023 - 2 
+#add AND NOT MARC."880"."4" match "aut" to stopp additional author appearing in contributor
+                when
+                               MARC."700" has any "a,b,c" AND NOT
+                               MARC."700"."4" match "aut" AND
+                               MARC.control is "001" 
+                then
+          set TEMP"1" to MARC."700" subfields "a,b,c,d,4" append translation "4"
+           remove string (TEMP"1","<")
+           remove string (TEMP"1",">")
+           remove string (TEMP"1","\\.")
+           remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
+           set TEMP"2" to MARC."700" sub without sort "a,b,c,d"
+           remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
+           remove string (TEMP"2","<")
+           remove string (TEMP"2",">")
+           add prefix (TEMP"2","$$Q")
+           remove substring using regex (TEMP"2","^$$Q$")
+           concatenate with delimiter (TEMP"1",TEMP"2","")
+           set TEMP"3" to multilingual by "700" "Contributor" "display"
+                                  concatenate with delimiter (TEMP"1",TEMP"3","")
+           create pnx."display"."contributor" with TEMP"1"
+end
+
+rule "Primo VE Display - contributor 710"
+                when
+                               MARC."710" has any "a,b,c,d"
+                then
+                set TEMP"1" to MARC."710" subfields "a,b,g,n,d,c,4" append translation "4"
+        remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
+        remove string (TEMP"1","<")
+        remove string (TEMP"1",">")
+                set TEMP"2" to MARC."710" sub without sort "a,b"
+        remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"2","$$Q")
+        remove substring using regex (TEMP"2","^$$Q$")
+        concatenate with delimiter (TEMP"1",TEMP"2","")
+        set TEMP"3" to multilingual by "710" "Contributor" "display"
+                concatenate with delimiter (TEMP"1",TEMP"3","")
+                create pnx."display"."contributor" with TEMP"1"
+end
+
+rule "Primo VE Display - contributor 711"
+                when
+                               MARC."711" has any "a,c,d,n"
+                then
+                set TEMP"1" to MARC."711" subfields "a,e,g,n,d,c,4" append translation "4"
+        remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
+        remove string (TEMP"1","<")
+        remove string (TEMP"1",">")
+                set TEMP"2" to MARC."711" sub without sort "a"
+        remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"2","$$Q")
+        remove substring using regex (TEMP"2","^$$Q$")
+        concatenate with delimiter (TEMP"1",TEMP"2","")
+        set TEMP"3" to multilingual by "711" "Contributor" "display"
+                concatenate with delimiter (TEMP"1",TEMP"3","")
+                create pnx."display"."contributor" with TEMP"1"
+end
+ 
+rule "Primo VE Display - alternate contributor 880-700"
+#version 2022-2
+#add display bcd to temp2 to perform exact search
+#version 2023 - 2
+#add AND NOT MARC."880"."4" match "aut" to stopp translation in wrong field
+                when
+                               MARC."880" has any "a,b,c,d,e,j,q,u" AND
+                               MARC."880"."6" match "700-.*" AND NOT
+                               MARC."880"."4" match "aut"
+                then
+                set TEMP"1" to MARC."880" subfields "a,b,c,d"
+        remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
+        remove string (TEMP"1","<")
+        remove string (TEMP"1",">")
+                set TEMP"2" to MARC."880" sub without sort "a,b,c,d"
+        remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"2","$$Q")
+        remove substring using regex (TEMP"2","^$$Q$")
+        concatenate with delimiter (TEMP"1",TEMP"2","")
+        set TEMP"3" to multilingual by "880" "Contributor" "display"
+                concatenate with delimiter (TEMP"1",TEMP"3","")
+                create pnx."display"."alternate_contributor" with TEMP"1"
+end
+
+rule "Primo VE Display - alternate contributor 880-710 "
+                when
+                               MARC."880" has any "a,b,c,d" AND
+                               MARC."880"."6" match "710-.*"
+                then
+                set TEMP"1" to MARC."880" subfields "a,b,g,n,d,c"
+        remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
+        remove string (TEMP"1","<")
+        remove string (TEMP"1",">")
+                set TEMP"2" to MARC."880" sub without sort "a,b"
+        remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"2","$$Q")
+        remove substring using regex (TEMP"2","^$$Q$")
+        concatenate with delimiter (TEMP"1",TEMP"2","")
+        set TEMP"3" to multilingual by "880" "Contributor" "display"
+                concatenate with delimiter (TEMP"1",TEMP"3","")
+               create pnx."display"."alternate_contributor" with TEMP"1"
+end
+
+rule "Primo VE Display - alternate contributor 880-711"
+               when
+                               MARC."880" has any "a,b,c,d,n" AND
+                               MARC."880"."6" match "711-.*"
+                then
+                set TEMP"1" to MARC."880" subfields "a,e,g,n,d,c"
+        remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
+        remove string (TEMP"1","<")
+        remove string (TEMP"1",">")
+                set TEMP"2" to MARC."880" sub without sort "a"
+        remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"2","$$Q")
+        remove substring using regex (TEMP"2","^$$Q$")
+        concatenate with delimiter (TEMP"1",TEMP"2","")
+        set TEMP"3" to multilingual by "880" "Contributor" "display"
+                concatenate with delimiter (TEMP"1",TEMP"3","")
+                create pnx."display"."alternate_contributor" with TEMP"1"
+end
