@@ -8,13 +8,16 @@ rule "Primo VE - contents 505gtr"
 #version 2022 Q3
 #remove italic
 #add semicolon for repeated subfields t
+#version 2024 Q2
+#removed "/" before $r
+#removed space before ";" at the end of $t
 when
             MARC."505" has any "g,t,r"
 then
             set TEMP"1" to MARC."505" sub without sort "g,t,r" wrap subfields
             replace wrapping delimiters (TEMP"1","g","","<br>")
             replace wrapping delimiters (TEMP"1","t",";££","££")
-           replace wrapping delimiters (TEMP"1","r"," ","<br>")
+           replace wrapping delimiters (TEMP"1","r","","<br>")
            replace string by string (TEMP"1",";££","")
 	   replace string by string (TEMP"1","££","; ")
             replace string by string (TEMP"1","--","")
