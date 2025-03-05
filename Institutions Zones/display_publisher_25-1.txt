@@ -1,28 +1,18 @@
 rule "Primo VE - Publisher"
 #version 2023-2
 # 23-4 added AND NOT (MARC."264"."a" match ".* :" OR MARC."264"."a" match ".* ;") to differentiate from rule Publisher 2
+#25-1 added $$3
                 when
                                MARC."264" has any "a" AND NOT
                                (MARC."264"."a" match ".* :" OR
                                 MARC."264"."a" match ".* ;")
                 then
-                    set TEMP"1" to MARC."264" sub without sort "a,b" wrap subfields
+                    set TEMP"1" to MARC."264" sub without sort "a,b,3" wrap subfields
                     replace wrapping delimiters (TEMP"1","a",""," : ")
                     replace wrapping delimiters (TEMP"1","b",""," ; ")
+                    replace wrapping delimiters (TEMP"1","3",""," : ")
                     remove substring using regex (TEMP"1","(/|:|;|; |=|,)+$")
                     create pnx."display"."publisher" with TEMP"1"
-end
-
-rule "Primo VE - Publisher without a"
-                when
-                               MARC."264" has any "3,b"
-                then
-                    set TEMP"1" to MARC."264" subfields "3"
-                    remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
-                    set TEMP"2" to MARC."264" subfields "b"
-                    remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
-            concatenate with delimiter (TEMP"1",TEMP"2"," : ")
-            create pnx."display"."publisher" with TEMP"1"
 end
 
 rule "Primo VE - Publisher 2"
