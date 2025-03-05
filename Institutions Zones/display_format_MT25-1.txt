@@ -34,6 +34,8 @@ rule "Primo VE - Format 254"
 end
 
 rule "Primo VE - Format 255"
+#01-25: Added $$f and $$g
+priority 10
 	when
 		MARC is "255"
 	then
@@ -42,10 +44,11 @@ rule "Primo VE - Format 255"
             set TEMP"3" to MARC."255" sub with " (" and ") " without sort "c,d,e"
             concatenate with delimiter support empty vals (TEMP"1",TEMP"2"," ; ")
             concatenate with delimiter support empty vals (TEMP"1",TEMP"3","  ")
-            add prefix (TEMP"1","255 ")
+            set TEMP"4" to MARC."255" sub with " (" and ") " without sort "f,g"
+            concatenate with delimiter support empty vals (TEMP"1",TEMP"4"," ; ")
+            add prefix (TEMP"1","$$C255$$V")
             create pnx."display"."format" with TEMP"1"
 end
-
 
 rule "Primo VE - Format 256"
 	when
