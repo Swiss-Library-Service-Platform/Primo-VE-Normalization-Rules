@@ -68,10 +68,14 @@ end
 rule "Primo VE Display - alternate creator 880-100"
 #version 2022-2
 #add subfield abcd to temp2 to perform exact search
+#25-1: Added fix for double display
 priority 10
 	when
 		MARC."880" has any "a,b,c,d" AND
-		MARC."880"."6" match "100-.*"
+		MARC."880"."6" match "100-.*" AND NOT
+               (MARC."880"."0" match ".*IDREF.*" OR
+                MARC."880"."0" match ".*DE-588.*" OR
+                MARC."880"."0" match ".*RERO.*")
 	then
 	set TEMP"1" to MARC."880" subfields "a,b,c,d"
         remove string (TEMP"1","<")
@@ -90,10 +94,14 @@ priority 10
 end
 
 rule "Primo VE Display - alternate creator 880-110"
+#25-1: Added fix for double display
 priority 20
 	when
 		MARC."880" has any "a,b,c,d,n" AND
-		MARC."880"."6" match "110-.*"
+		MARC."880"."6" match "110-.*" AND NOT
+               (MARC."880"."0" match ".*IDREF.*" OR
+                MARC."880"."0" match ".*DE-588.*" OR
+                MARC."880"."0" match ".*RERO.*")
 	then
 	set TEMP"1" to MARC."880" subfields "a,b,g,n,d,c"
         remove string (TEMP"1","<")
@@ -112,10 +120,14 @@ priority 20
 end
 
 rule "Primo VE Display - alternate creator 880-111"
+#25-1: Added fix for double display
 priority 30
 	when
 		MARC."880" has any "a,c,d,n" AND
-		MARC."880"."6" match "111-.*"
+		MARC."880"."6" match "111-.*" AND NOT
+               (MARC."880"."0" match ".*IDREF.*" OR
+                MARC."880"."0" match ".*DE-588.*" OR
+                MARC."880"."0" match ".*RERO.*")
 	then
 	set TEMP"1" to MARC."880" subfields "a,e,g,n,d,c" 
         remove string (TEMP"1","<")
