@@ -188,7 +188,10 @@ priority 40
                 when
                                MARC."880" has any "a,b,c,d,e,j,q,u" AND
                                MARC."880"."6" match "700-.*" AND
-                               MARC."880"."4" match "aut"
+                               MARC."880"."4" match "aut" AND NOT
+                              (MARC."880"."0" match ".*IDREF.*" OR
+                               MARC."880"."0" match ".*DE-588.*" OR
+                               MARC."880"."0" match ".*RERO.*")
                 then
                 set TEMP"1" to MARC."880" subfields "a,b,c,d"
         remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
