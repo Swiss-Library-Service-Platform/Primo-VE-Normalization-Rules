@@ -185,6 +185,8 @@ priority 40
 #add MARC."880"."4" match "aut" to show translation for additional author in creator
 #version 2024-3
 #set priority
+#version 2025-2
+#stopped double display 700-880
                 when
                                MARC."880" has any "a,b,c,d,e,j,q,u" AND
                                MARC."880"."6" match "700-.*" AND
