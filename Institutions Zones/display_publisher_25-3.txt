@@ -35,15 +35,32 @@ rule "Primo VE - Publisher-260"
 		MARC."260" has any "a,b,e,f"
 	then
 		set TEMP"1" to MARC."260" subfields "a"
-		remove substring using regex (TEMP"1","(/|:|;|=|,)+$")
+                remove substring using regex (TEMP"1","(/|:|;|; |=|,)+$")
 		set TEMP"2" to MARC."260" subfields "b"
-		remove substring using regex (TEMP"2","(/|:|;|=|,)+$")
+                    remove substring using regex (TEMP"2","(/|:|;|; |=|,)+$")
 		concatenate with delimiter (TEMP"1",TEMP"2"," : ")
 		set TEMP"3" to MARC."260" subfields "e"
-		remove substring using regex (TEMP"3","(/|:|;|=|,)+$")
+                    remove substring using regex (TEMP"3","(/|:|;|; |=|,)+$")
 		set TEMP"4" to MARC."260" subfields "f"
-		remove substring using regex (TEMP"4","(/|:|;|=|,)+$")
+                    remove substring using regex (TEMP"4","(/|:|;|; |=|,)+$")
 		concatenate with delimiter (TEMP"3",TEMP"4"," : ")
+		concatenate with delimiter (TEMP"1",TEMP"3"," ")
+		create pnx."display"."publisher" with TEMP"1"
+end
+
+rule "Primo VE - Publisher-260-No$a"
+#25-3: New rule for cases with no $$a
+	when
+		MARC."260" has any "b,e,f" AND NOT
+		MARC."260"."a" match ".*"
+	then
+		set TEMP"1" to MARC."260" subfields "b"
+                    remove substring using regex (TEMP"1","(/|:|;|; |=|,)+$")
+		set TEMP"2" to MARC."260" subfields "e"
+                    remove substring using regex (TEMP"2","(/|:|;|; |=|,)+$")
+		set TEMP"3" to MARC."260" subfields "f"
+                    remove substring using regex (TEMP"3","(/|:|;|; |=|,)+$")
+		concatenate with delimiter (TEMP"1",TEMP"2"," : ")
 		concatenate with delimiter (TEMP"1",TEMP"3"," ")
 		create pnx."display"."publisher" with TEMP"1"
 end
