@@ -1,0 +1,78 @@
+rule "Primo VE Marc - Lsr04"
+#version 25-4: Reworked all rules and moved field to lsr04
+       when
+		MARC is "600"."a" AND
+                MARC."600"."0" match "\\(DE-588\\).*" 
+	then
+               set TEMP"1" to MARC."600" subfields "a" 
+               set TEMP"3" to MARC."600" subfields "d" 
+               set TEMP"4" to MARC."600" subfields "t"
+               concatenate with delimiter (TEMP"1",TEMP"3"," : ")
+               concatenate with delimiter (TEMP"1",TEMP"4"," : ")
+	       create pnx."search"."lsr04" with TEMP"1"
+end
+
+rule "Primo VE Marc - Lsr04 - id610"
+	when
+		MARC is "610"."a" AND
+                MARC."610"."0" match "\\(DE-588\\).*" 
+	then
+               set TEMP"1" to MARC."610" subfields "a" 
+               set TEMP"3" to MARC."610" subfields "b" 
+               set TEMP"4" to MARC."610" subfields "t"
+               concatenate with delimiter (TEMP"1",TEMP"3"," : ")
+               concatenate with delimiter (TEMP"1",TEMP"4"," : ")
+	       create pnx."search"."lsr04" with TEMP"1"
+end
+
+rule "Primo VE Marc - Lsr04 - id611"
+	when
+		MARC is "611"."a" AND
+                MARC."611"."0" match "\\(DE-588\\).*" 
+	then
+               set TEMP"1" to MARC."611" subfields "a" 
+	       create pnx."search"."lsr04" with TEMP"1"
+end
+
+rule "Primo VE Marc - Lsr04 - id630"
+	when
+		MARC is "630"."a" AND
+                MARC."630"."0" match "\\(DE-588\\).*" 
+	then
+               set TEMP"1" to MARC."630" subfields "a" 
+	       create pnx."search"."lsr04" with TEMP"1"
+end
+
+rule "Primo VE Marc - Lsr04 - id648"
+#version 2022-2
+#add search on 648
+	when
+		MARC is "648"."a" AND
+                MARC."648"."2" match "gnd.*" 
+	then
+               set TEMP"1" to MARC."648" subfields "a" 
+	       create pnx."search"."lsr04" with TEMP"1"
+end
+
+rule "Primo VE Marc - Lsr04 - id650"
+	when
+		MARC is "650"."a" AND
+                MARC."650"."2" match "gnd.*"
+	then
+               set TEMP"1" to MARC."650" subfields "a" 
+               set TEMP"2" to MARC."650" subfields "g"
+               concatenate with delimiter (TEMP"1",TEMP"2"," : ")
+	       create pnx."search"."lsr04" with TEMP"1"
+end
+
+rule "Primo VE Marc - Lsr04 - id651"
+	when
+		MARC is "651"."a" AND
+                MARC."651"."0" match "\\(DE-588\\).*" 
+	then
+               set TEMP"1" to MARC."651" subfields "a" 
+               set TEMP"2" to MARC."651" subfields "g"
+               concatenate with delimiter (TEMP"1",TEMP"2"," : ")
+	       create pnx."search"."lsr04" with TEMP"1"
+end
+
