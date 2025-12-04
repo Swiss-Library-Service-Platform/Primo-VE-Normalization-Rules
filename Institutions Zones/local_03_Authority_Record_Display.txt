@@ -1,0 +1,633 @@
+rule "Primo VE - Lds03"
+#version 25-4: changed field to Authority Record, was Display in GND
+when
+		MARC is "100"."a" AND MARC."100"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."100" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."100" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_100"
+when
+	MARC is "100"."0" 
+        AND MARC."100"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."100"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."100" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_110"
+when
+		MARC is "110"."a" AND MARC."110"."0" match "\\(DE-588\\).*" 
+	then
+       set TEMP"1" to MARC."110" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."110" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_110"
+when
+	MARC is "110"."0" 
+        AND MARC."110"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."110"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."110" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_111"
+when
+		MARC is "111"."a" AND MARC."111"."0" match "\\(DE-588\\).*" 
+	then
+       set TEMP"1" to MARC."111" subfields "0"
+       remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+       set TEMP"2" to MARC."111" subfields "a-d,f-t"
+       remove string (TEMP"2","<")
+       remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_111"
+when
+	MARC is "111"."0" 
+        AND MARC."111"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."111"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."111" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_130"
+when
+		MARC is "130"."a" AND MARC."130"."0" match "\\(DE-588\\).*" 
+	then
+       set TEMP"1" to MARC."130" subfields "0"
+       remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+       set TEMP"2" to MARC."130" subfields "a-d,f-t"
+       remove string (TEMP"2","<")
+       remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_130"
+when
+	MARC is "130"."0" 
+        AND MARC."130"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."130"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."130" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+
+rule "Primo VE - Lds03-GND_700"
+when
+		MARC is "700"."a" AND MARC."700"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."700" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."700" subfields "a,b,c,q,d,t,j,k,l,m,n,p,r,f,u"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_700"
+when
+	MARC is "700"."0" 
+        AND MARC."700"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."700"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."700" subfields "a-u,w-z"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_710"
+when
+		MARC is "710"."a" AND MARC."710"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."710" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."710" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_710"
+when
+	MARC is "710"."0" 
+        AND MARC."710"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."710"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."710" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_711"
+when
+		MARC is "711"."a" AND MARC."711"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."711" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."711" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_711"
+when
+	MARC is "711"."0" 
+        AND MARC."711"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."711"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."711" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_730"
+when
+		MARC is "730"."a" AND MARC."730"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."730" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."730" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_730"
+when
+	MARC is "730"."0" 
+        AND MARC."730"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."730"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."730" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end
+
+rule "Primo VE - Lds03-GND_751"
+when
+		MARC is "751"."a" AND MARC."751"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."751" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."751" subfields "a,z"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_751"
+when
+	MARC is "751"."0" 
+        AND MARC."751"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."751"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."751" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_600"
+when
+		MARC is "600"."a" AND MARC."600"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."600" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."600" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_600"
+when
+	MARC is "600"."0" 
+        AND MARC."600"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."600"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."600" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_610"
+when
+		MARC is "610"."a" AND MARC."610"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."610" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."610" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_610"
+when
+	MARC is "610"."0" 
+        AND MARC."610"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."610"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."610" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end
+
+rule "Primo VE - Lds03-GND_611"
+when
+		MARC is "611"."a" AND MARC."611"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."611" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."611" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_611"
+when
+	MARC is "611"."0" 
+        AND MARC."611"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."611"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."611" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_630"
+when
+		MARC is "630"."a" AND MARC."630"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."630" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."630" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_630"
+when
+	MARC is "630"."0" 
+        AND MARC."630"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."630"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."630" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_647"
+when
+		MARC is "647"."a" AND MARC."647"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."647" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."647" subfields "a"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_647"
+when
+	MARC is "647"."0" 
+        AND MARC."647"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."647"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."647" subfields "a"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_648"
+when
+		MARC is "648"."a" AND MARC."648"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."648" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."648" subfields "a"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_648"
+when
+	MARC is "648"."0" 
+        AND MARC."648"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."648"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."648" subfields "a"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_650"
+when
+		MARC is "650"."a" AND MARC."650"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."650" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."650" subfields "a"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_650"
+#version MT 23-2
+when
+	MARC is "650"."0" 
+        AND MARC."650"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."650"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."650" subfields "a-d,v-z" delimited by " -- " remove substring using regex "\\.+$"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end
+
+rule "Primo VE - Lds03-GND_651"
+when
+		MARC is "651"."a" AND MARC."651"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."651" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."651" subfields "a,z"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-IDref_651"
+#version MT 23-2
+when
+	MARC is "651"."0" 
+        AND MARC."651"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."651"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+       set TEMP"2" to MARC."651" subfields "a-d,v-z" delimited by " -- " remove substring using regex "\\.+$"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
+
+rule "Primo VE - Lds03-GND_880"
+when
+		MARC is "880"."a" AND MARC."880"."0" match "\\(DE-588\\).*" 
+	then
+        set TEMP"1" to MARC."880" subfields "0"
+        remove substring using regex (TEMP"1","\\(|\\)|\\DE-588")
+        set TEMP"2" to MARC."880" subfields "a,b,c,q,d,t,j,k,l,m,n,p,r,f,u"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://explore.gnd.network/gnd/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","GND: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end		
+
+rule "Primo VE - Lds03-IDref_880"
+when
+	MARC is "880"."0" 
+        AND MARC."880"."0" match "\\(IDREF\\).*" 
+then
+       set TEMP"1" to MARC."880"."0"
+       remove substring using regex (TEMP"1","\\(IDREF\\)")
+        set TEMP"2" to MARC."880" subfields "a-d,f-t"
+        remove string (TEMP"2","<")
+        remove string (TEMP"2",">")
+        add prefix (TEMP"1","<a target=\"_blank\" href=\"https://www.idref.fr/")
+        add suffix  (TEMP"1","\">")
+        add suffix  (TEMP"2","</a>")
+        concatenate with delimiter (TEMP"1",TEMP"2"," ")
+        add prefix (TEMP"1","Idref: ")
+       create pnx."display"."lds03" with TEMP"1"        
+end	
