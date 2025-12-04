@@ -1,4 +1,5 @@
 rule "Primo VE Marc - Lsr03"
+#version 25-4: changed field to Authority Record, was Display in GND
 	when
 		MARC is "100"."0"
 	then
@@ -52,6 +53,13 @@ rule "Primo VE Marc - Lsr03 - id630"
 		MARC is "630"."0"
 	then
 		create pnx."search"."lsr03" with MARC "630"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id647"
+	when
+		MARC is "647"."0"
+	then
+		create pnx."search"."lsr03" with MARC "647"."0"
 end
 
 rule "Primo VE Marc - Lsr03 - id648"
