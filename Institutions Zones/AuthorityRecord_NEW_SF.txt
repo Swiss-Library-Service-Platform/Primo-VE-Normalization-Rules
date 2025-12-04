@@ -1,0 +1,128 @@
+rule "Primo VE Marc - Lsr03"
+#version 25-4: changed field to Authority Record, was Display in GND
+	when
+		MARC is "100"."0"
+	then
+		create pnx."search"."lsr03" with MARC "100"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id110"
+	when
+		MARC is "110"."0"
+	then
+		create pnx."search"."lsr03" with MARC "110"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id111"
+	when
+		MARC is "111"."0"
+	then
+		create pnx."search"."lsr03" with MARC "111"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id130"
+	when
+		MARC is "130"."0"
+	then
+		create pnx."search"."lsr03" with MARC "130"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id600"
+	when
+		MARC is "600"."0"
+	then
+		create pnx."search"."lsr03" with MARC "600"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id610"
+	when
+		MARC is "610"."0"
+	then
+		create pnx."search"."lsr03" with MARC "610"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id611"
+	when
+		MARC is "611"."0"
+	then
+		create pnx."search"."lsr03" with MARC "611"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id630"
+	when
+		MARC is "630"."0"
+	then
+		create pnx."search"."lsr03" with MARC "630"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id647"
+	when
+		MARC is "647"."0"
+	then
+		create pnx."search"."lsr03" with MARC "647"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id648"
+#version 2022-2
+#add search on 648
+	when
+		MARC is "648"."0"
+	then
+		create pnx."search"."lsr03" with MARC "648"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id650"
+	when
+		MARC is "650"."0"
+	then
+		create pnx."search"."lsr03" with MARC "650"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id651"
+	when
+		MARC is "651"."0"
+	then
+		create pnx."search"."lsr03" with MARC "651"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id700"
+	when
+		MARC is "700"."0"
+	then
+		create pnx."search"."lsr03" with MARC "700"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id710"
+	when
+		MARC is "710"."0"
+	then
+		create pnx."search"."lsr03" with MARC "710"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id711"
+	when
+		MARC is "711"."0"
+	then
+		create pnx."search"."lsr03" with MARC "711"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id730"
+	when
+		MARC is "730"."0"
+	then
+		create pnx."search"."lsr03" with MARC "730"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id751"
+	when
+		MARC is "751"."0"
+	then
+		create pnx."search"."lsr03" with MARC "751"."0"
+end
+
+rule "Primo VE Marc - Lsr03 - id880"
+	when
+		MARC is "880"."0"
+	then
+		create pnx."search"."lsr03" with MARC "880"."0"
+end
