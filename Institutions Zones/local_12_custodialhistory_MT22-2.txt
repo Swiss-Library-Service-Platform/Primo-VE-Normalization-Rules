@@ -35,3 +35,257 @@ concatenate with delimiter support empty vals (TEMP"1",TEMP"3","")
 create pnx."display"."lds12" with TEMP"1"
 end
 
+rule "Primo VE - Lds12-361-GND+Link"
+#Version for GND in $0 and external Link in $u
+priority 20
+	when
+		MARC."361" has any "5,a,u,0" AND
+                MARC."361"."0" match "\\(DE-588\\).*" AND 
+                (MARC."361"."u" match "http.*" OR MARC."361"."u" match "https.*")
+	then
+		set TEMP"1" to MARC."361" subfields "o"
+		set TEMP"2" to MARC."361" subfields "0"
+		remove substring using regex (TEMP"2","\\(DE-588\\)")
+		set TEMP"3" to MARC."361" subfields "a"
+		add suffix  (TEMP"3","</a>")
+        add prefix (TEMP"2","<a target=\"_blank\" href=\"http://d-nb.info/gnd/")
+		add suffix  (TEMP"2","\">")
+		concatenate with delimiter (TEMP"2",TEMP"3","")
+		concatenate with delimiter (TEMP"1",TEMP"2",": ")
+		set TEMP"4" to MARC."361" sub without sort "f" wrap subfields
+                replace wrapping delimiters (TEMP"4","f","","-.-")
+                remove substring using regex (TEMP"4","-\\.-.*$")
+		concatenate with delimiter (TEMP"1",TEMP"4",". - ")
+		set TEMP"5" to MARC."361" subfields "k" 
+		set TEMP"6" to MARC."361" subfields "k"
+		set TEMP"7" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"5",".{6}") #day
+		remove substring using regex (TEMP"6","^.{4}") #month
+		remove substring using regex (TEMP"6",".{2}$") #month
+		remove substring using regex (TEMP"7",".{4}$") #year
+		concatenate with delimiter (TEMP"5",TEMP"6",".")
+		concatenate with delimiter (TEMP"5",TEMP"7",".")
+		concatenate with delimiter (TEMP"1",TEMP"5",": ")
+		set TEMP"8" to MARC."361" subfields "l"
+		concatenate with delimiter (TEMP"1",TEMP"8",": ")
+		set TEMP"9" to MARC."361" subfields "u"
+		set TEMP"10" to MARC."361" subfields "z"
+		add suffix  (TEMP"10","</a>")
+		add prefix (TEMP"9","<a target=\"_blank\" href=\"")
+		add suffix  (TEMP"9","\">")
+		concatenate with delimiter (TEMP"9",TEMP"10","")
+		concatenate with delimiter (TEMP"1",TEMP"9"," : ")
+		set TEMP"11" to MARC."361" subfields "5" append translation "5"
+        concatenate with delimiter (TEMP"1",TEMP"11",". - ")
+		set TEMP"12" to MARC."361" subfields "s" 
+        concatenate with delimiter (TEMP"1",TEMP"12",", ")
+		create pnx."display"."lds12" with TEMP"1" 
+	end
+	
+rule "Primo VE - Lds12-361-GND+noLink"
+#Version for GND in $0 and no external Link in $u
+priority 20
+	when
+		MARC."361" has any "5,a,u,0" AND
+                MARC."361"."0" match "\\(DE-588\\).*" AND NOT
+                (MARC."361"."u" match "http.*" OR MARC."361"."u" match "https.*")
+	then
+		set TEMP"1" to MARC."361" subfields "o"
+		set TEMP"2" to MARC."361" subfields "0"
+		remove substring using regex (TEMP"2","\\(DE-588\\)")
+		set TEMP"3" to MARC."361" subfields "a"
+		add suffix  (TEMP"3","</a>")
+        add prefix (TEMP"2","<a target=\"_blank\" href=\"http://d-nb.info/gnd/")
+		add suffix  (TEMP"2","\">")
+		concatenate with delimiter (TEMP"2",TEMP"3","")
+		concatenate with delimiter (TEMP"1",TEMP"2",": ")
+		set TEMP"4" to MARC."361" sub without sort "f" wrap subfields
+                replace wrapping delimiters (TEMP"4","f","","-.-")
+                remove substring using regex (TEMP"4","-\\.-.*$")
+		concatenate with delimiter (TEMP"1",TEMP"4",". - ")
+		set TEMP"5" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"5",".{6}") #day
+		set TEMP"6" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"6","^.{4}") #month
+		remove substring using regex (TEMP"6",".{2}$") #month
+		set TEMP"7" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"7",".{4}$") #year
+		concatenate with delimiter (TEMP"5",TEMP"6",".")
+		concatenate with delimiter (TEMP"5",TEMP"7",".")
+		concatenate with delimiter (TEMP"1",TEMP"5",": ")
+		set TEMP"8" to MARC."361" subfields "l"
+		concatenate with delimiter (TEMP"1",TEMP"8",": ")
+		set TEMP"9" to MARC."361" subfields "z"
+		concatenate with delimiter (TEMP"1",TEMP"9"," : ")
+		set TEMP"10" to MARC."361" subfields "5" append translation "5"
+        concatenate with delimiter (TEMP"1",TEMP"10",". - ")
+		set TEMP"11" to MARC."361" subfields "s" 
+        concatenate with delimiter (TEMP"1",TEMP"11",", ")
+		create pnx."display"."lds12" with TEMP"1" 
+	end
+	
+rule "Primo VE - Lds12-361-Idref+Link"
+#Version for Idref in $0 and external Link in $u
+priority 20
+	when
+		MARC."361" has any "5,a,u,0" AND
+                MARC."361"."0" match "\\(IDREF\\).*" AND 
+                (MARC."361"."u" match "http.*" OR MARC."361"."u" match "https.*")
+	then
+		set TEMP"1" to MARC."361" subfields "o"
+		set TEMP"2" to MARC."361" subfields "0"
+		remove substring using regex (TEMP"2","\\(IDREF\\)")
+		set TEMP"3" to MARC."361" subfields "a"
+		add suffix  (TEMP"3","</a>")
+        add prefix (TEMP"2","<a target=\"_blank\" href=\"https://www.idref.fr/")
+		add suffix  (TEMP"2","\">")
+		concatenate with delimiter (TEMP"2",TEMP"3","")
+		concatenate with delimiter (TEMP"1",TEMP"2",": ")
+		set TEMP"4" to MARC."361" sub without sort "f" wrap subfields
+                replace wrapping delimiters (TEMP"4","f","","-.-")
+                remove substring using regex (TEMP"4","-\\.-.*$")
+		concatenate with delimiter (TEMP"1",TEMP"4",". - ")
+		set TEMP"5" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"5",".{6}") #day
+		set TEMP"6" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"6",".{2}$") #month
+		remove substring using regex (TEMP"6","^.{4}") #month
+		set TEMP"7" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"7",".{4}$") #year
+		concatenate with delimiter (TEMP"5",TEMP"6",".")
+		concatenate with delimiter (TEMP"5",TEMP"7",".")
+		concatenate with delimiter (TEMP"1",TEMP"5",": ")
+		set TEMP"8" to MARC."361" subfields "l"
+		concatenate with delimiter (TEMP"1",TEMP"8",": ")
+		set TEMP"9" to MARC."361" subfields "u"
+		set TEMP"10" to MARC."361" subfields "z"
+		add suffix  (TEMP"10","</a>")
+		add prefix (TEMP"9","<a target=\"_blank\" href=\"")
+		add suffix  (TEMP"9","\">")
+		concatenate with delimiter (TEMP"9",TEMP"10","")
+		concatenate with delimiter (TEMP"1",TEMP"9"," : ")
+		set TEMP"11" to MARC."361" subfields "5" append translation "5"
+        concatenate with delimiter (TEMP"1",TEMP"11",". - ")
+		set TEMP"12" to MARC."361" subfields "s" 
+        concatenate with delimiter (TEMP"1",TEMP"12",", ")
+		create pnx."display"."lds12" with TEMP"1" 
+	end
+	
+rule "Primo VE - Lds12-361-Idref+noLink"
+#Version for Idref in $0 and no external Link in $u
+priority 20
+	when
+		MARC."361" has any "5,a,u,0" AND
+                MARC."361"."0" match "\\(IDREF\\).*" AND NOT
+                (MARC."361"."u" match "http.*" OR MARC."361"."u" match "https.*")
+	then
+		set TEMP"1" to MARC."361" subfields "o"
+		set TEMP"2" to MARC."361" subfields "0"
+		remove substring using regex (TEMP"2","\\(IDREF\\)")
+		set TEMP"3" to MARC."361" subfields "a"
+		add suffix  (TEMP"3","</a>")
+        add prefix (TEMP"2","<a target=\"_blank\" href=\"https://www.idref.fr/")
+		add suffix  (TEMP"2","\">")
+		concatenate with delimiter (TEMP"2",TEMP"3","")
+		concatenate with delimiter (TEMP"1",TEMP"2",": ")
+		set TEMP"4" to MARC."361" sub without sort "f" wrap subfields
+                replace wrapping delimiters (TEMP"4","f","","-.-")
+                remove substring using regex (TEMP"4","-\\.-.*$")
+		concatenate with delimiter (TEMP"1",TEMP"4",". - ")
+		set TEMP"5" to MARC."361" subfields "k" 
+		remove substring using regex (TEMP"5",".{6}") #day
+		set TEMP"6" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"6",".{2}$") #month
+		remove substring using regex (TEMP"6","^.{4}") #month
+		set TEMP"7" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"7",".{4}$") #year
+		concatenate with delimiter (TEMP"5",TEMP"6",".")
+		concatenate with delimiter (TEMP"5",TEMP"7",".")
+		concatenate with delimiter (TEMP"1",TEMP"5",": ")
+		set TEMP"8" to MARC."361" subfields "l"
+		concatenate with delimiter (TEMP"1",TEMP"8",": ")
+		set TEMP"9" to MARC."361" subfields "z"
+		concatenate with delimiter (TEMP"1",TEMP"9",": ")
+		set TEMP"10" to MARC."361" subfields "5" append translation "5"
+        concatenate with delimiter (TEMP"1",TEMP"10",". - ")
+		set TEMP"11" to MARC."361" subfields "s" 
+        concatenate with delimiter (TEMP"1",TEMP"11",", ")
+		create pnx."display"."lds12" with TEMP"1" 
+	end
+	
+rule "Primo VE - Lds12-361-noVocab+Link"
+#Version for no Vocabulary in $0 and external Link in $u
+priority 20
+	when
+		MARC."361" has any "5,a,u,0" AND NOT
+                (MARC."361"."0" match "\\(IDREF\\).*" OR MARC."361"."0" match "\\(DE-588\\).*") AND 
+                (MARC."361"."u" match "http.*" OR MARC."361"."u" match "https.*")
+	then
+		set TEMP"1" to MARC."361" subfields "o"
+		set TEMP"3" to MARC."361" subfields "a"
+		concatenate with delimiter (TEMP"1",TEMP"3",": ")
+		set TEMP"4" to MARC."361" sub without sort "f" wrap subfields
+                replace wrapping delimiters (TEMP"4","f","","-.-")
+                remove substring using regex (TEMP"4","-\\.-.*$") 
+		concatenate with delimiter (TEMP"1",TEMP"4",". - ")
+		set TEMP"5" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"5",".{6}") #day
+		set TEMP"6" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"6",".{2}$") #month
+		remove substring using regex (TEMP"6","^.{4}") #month
+		set TEMP"7" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"7",".{4}$") #year
+		concatenate with delimiter (TEMP"5",TEMP"6",".")
+		concatenate with delimiter (TEMP"5",TEMP"7",".")
+		concatenate with delimiter (TEMP"1",TEMP"5",": ")
+		set TEMP"8" to MARC."361" subfields "l"
+		concatenate with delimiter (TEMP"1",TEMP"8",": ")
+		set TEMP"9" to MARC."361" subfields "u"
+		set TEMP"10" to MARC."361" subfields "z"
+		add suffix  (TEMP"10","</a>")
+		add prefix (TEMP"9","<a target=\"_blank\" href=\"")
+		add suffix  (TEMP"9","\">")
+		concatenate with delimiter (TEMP"9",TEMP"10","")
+		concatenate with delimiter (TEMP"1",TEMP"9",": ")
+		set TEMP"11" to MARC."361" subfields "5" append translation "5"
+        concatenate with delimiter (TEMP"1",TEMP"11",". - ")
+		set TEMP"12" to MARC."361" subfields "s" 
+        concatenate with delimiter (TEMP"1",TEMP"12",", ")
+		create pnx."display"."lds12" with TEMP"1" 
+	end
+	
+rule "Primo VE - Lds12-361-noVocab+noLink"
+#Version for no Vocabulary in $0 and no external Link in $u
+priority 20
+	when
+		MARC."361" has any "5,a,u,0" AND NOT
+                (MARC."361"."0" match "\\(IDREF\\).*" OR MARC."361"."0" match "\\(DE-588\\).*") AND NOT
+                (MARC."361"."u" match "http.*" OR MARC."361"."u" match "https.*")
+	then
+		set TEMP"1" to MARC."361" subfields "o"
+		set TEMP"3" to MARC."361" subfields "a"
+		concatenate with delimiter (TEMP"1",TEMP"3",": ")
+		set TEMP"4" to MARC."361" sub without sort "f" wrap subfields
+                replace wrapping delimiters (TEMP"4","f","","-.-")
+                remove substring using regex (TEMP"4","-\\.-.*$")
+		concatenate with delimiter (TEMP"1",TEMP"4",". - ")
+		set TEMP"5" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"5",".{6}") #day
+		set TEMP"6" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"6",".{2}$") #month
+		remove substring using regex (TEMP"6","^.{4}") #month
+		set TEMP"7" to MARC."361" subfields "k"
+		remove substring using regex (TEMP"7",".{4}$") #year
+		concatenate with delimiter (TEMP"5",TEMP"6",".")
+		concatenate with delimiter (TEMP"5",TEMP"7",".")
+		concatenate with delimiter (TEMP"1",TEMP"5",": ")
+		set TEMP"8" to MARC."361" subfields "l"
+		concatenate with delimiter (TEMP"1",TEMP"8",": ")
+		set TEMP"9" to MARC."361" subfields "z"
+		concatenate with delimiter (TEMP"1",TEMP"9"," : ")
+		set TEMP"10" to MARC."361" subfields "5" append translation "5"
+        concatenate with delimiter (TEMP"1",TEMP"10",". - ")
+		set TEMP"11" to MARC."361" subfields "s" 
+        concatenate with delimiter (TEMP"1",TEMP"11",", ")
+		create pnx."display"."lds12" with TEMP"1" 
+	end
