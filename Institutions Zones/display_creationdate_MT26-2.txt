@@ -1,7 +1,9 @@
 rule "Primo VE - Date Of Publication 264"
+#version 2026-2: stopped display of copyright field
 priority 50
 	when
- MARC is "264"."c"
+ MARC is "264"."c" AND NOT
+ MARC."264"."c" match "©.*"
  then
 create pnx."display"."creationdate" with MARC."264"."c"
 end 
